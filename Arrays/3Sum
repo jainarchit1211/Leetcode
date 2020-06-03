@@ -1,0 +1,40 @@
+/*
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? 
+Find all unique triplets in the array which gives the sum of zero.
+
+Sol:
+Sort the array 
+Fix element and find the remaining sum in the remaining array
+*/
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> sum = new ArrayList<>();
+        HashSet<List<Integer>> set = new HashSet<>();
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            int p =i +1;
+            int q = nums.length-1;
+            while(p<q){
+                if(nums[i] + nums[q]+nums[p] == 0){
+                    List<Integer> l = new ArrayList<>();
+                    l.add(nums[i]);
+                    l.add(nums[p]);
+                    l.add(nums[q]);
+                    set.add(l);
+                    p++;
+                    q--;
+                }
+                else if(nums[i] + nums[q]+nums[p] < 0) p++;
+                else q--;
+            }
+            
+        }
+        Iterator<List<Integer>> a = set.iterator();
+        while(a.hasNext()){
+            sum.add(a.next());
+        }
+        
+        return sum;
+    }
+}
